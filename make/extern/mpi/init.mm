@@ -25,6 +25,7 @@ mpi.defines := \
     WITH_MPI \
     ${if ${findstring mpich,$(mpi.flavor)}, WITH_MPICH,} \
     ${if ${findstring openmpi,$(mpi.flavor)}, WITH_OPENMPI,} \
+    ${if ${findstring mvapich2,$(mpi.flavor)}, WITH_MVAPICH2,} \
 # the canonical form of the include directory
 mpi.incpath ?= $(mpi.dir)/include
 
@@ -42,6 +43,9 @@ mpi.libraries := \
          mpi_cxx mpi, \
          mpi \
        } \
+    } \
+    ${if ${findstring mvapich2,$(mpi.flavor)}, \
+       mpifort mpicxx mpi, \
     }
 
 
