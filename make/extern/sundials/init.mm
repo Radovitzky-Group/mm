@@ -24,7 +24,7 @@ sundials.libpath ?= $(sundials.dir)/lib
 # its rpath
 sundials.rpath = $(sundials.libpath)
 # the names of the libraries
-sundials.libraries ?= sundials_cvodes sundials_ida sundials_nvecserial sundials_sunlinsoldense sundials_sunlinsolband
+sundials.libraries ?= sundials_cvodes sundials_ida sundials_nvecserial sundials_sunlinsoldense sundials_sunlinsolband sundials_core
 
 # my dependencies
 sundials.dependencies :=
