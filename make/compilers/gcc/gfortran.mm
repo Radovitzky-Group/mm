@@ -60,5 +60,9 @@ gfortran.mixed.libraries += gfortran
 define gfortran.makedep =
 endef
 
+# clean up temporaries left behind while compiling
+#  usage: gfortran.clean {base-name}
+gfortran.clean := 
+
 
 # end of file
