@@ -1,11 +1,11 @@
 # -*- Makefile -*-
 #
 # michael a.g. aïvázis <michael.aivazis@para-sim.com>
-# (c) 1998-2025 all rights reserved
+# (c) 1998-2026 all rights reserved
 
 
 # initialize the list of known languages
-languages := c c++ fortran python cython cuda javascript graphql
+languages := c c++ fortran python cython cuda graphql # javascript
 
 # load the known languages
 include $(languages:%=make/languages/%.mm)

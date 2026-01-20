@@ -1,7 +1,7 @@
 # -*- Makefile -*-
 #
 # michael a.g. aïvázis <michael.aivazis@para-sim.com>
-# (c) 1998-2025 all rights reserved
+# (c) 1998-2026 all rights reserved
 
 
 # default compilers; specify as many as necessary in the form {family} or {family/language}
@@ -12,7 +12,7 @@ platform.compilers = gcc python cython
 platform.clean = $(1).dSYM
 
 # the location of the system headers
-platform.isysroot := /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk
+platform.isysroot := /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk
 
 # c
 platform.c.flags = -arch x86_64 $($(compiler.c).compile.isysroot) $(platform.isysroot)

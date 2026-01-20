@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 #
 # michael a.g. aïvázis <michael.aivazis@para-sim.com>
-# (c) 1998-2025 all rights reserved
+# (c) 1998-2026 all rights reserved
 
 # externals
 import os
@@ -25,7 +25,7 @@ except ImportError:
     os.makedirs(pdir, exist_ok=True)
 
     # the target version
-    release = "v1.12.4"
+    release = "v1.12.5"
     # the bootstrapping package
     boot = "pyre-boot.zip"
 
@@ -64,7 +64,7 @@ class mm(pyre.application, family="pyre.applications.mm", namespace="mm"):
     An opinionated framework for building software based on GNU make
 
     Michael Aïvázis <michael.aivazis@para-sim.com>
-    copyright 1998-2025 all rights reserved
+    copyright 1998-2026 all rights reserved
     """
 
     # user configurable state

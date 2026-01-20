@@ -1,7 +1,7 @@
 # -*- Makefile -*-
 #
 # michael a.g. aïvázis <michael.aivazis@para-sim.com>
-# (c) 1998-2025 all rights reserved
+# (c) 1998-2026 all rights reserved
 
 
 # add me to the pile
@@ -24,7 +24,12 @@ sundials.libpath ?= $(sundials.dir)/lib
 # its rpath
 sundials.rpath = $(sundials.libpath)
 # the names of the libraries
-sundials.libraries ?= sundials_cvodes sundials_ida sundials_nvecserial sundials_sunlinsoldense sundials_sunlinsolband
+sundials.libraries := \
+    ${foreach \
+        requirement, \
+        $(sundials.required), \
+        sundials_$(requirement) \
+    }
 
 # my dependencies
 sundials.dependencies :=

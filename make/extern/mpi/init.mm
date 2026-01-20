@@ -1,7 +1,7 @@
 # -*- Makefile -*-
 #
 # michael a.g. aïvázis <michael.aivazis@para-sim.com>
-# (c) 1998-2025 all rights reserved
+# (c) 1998-2026 all rights reserved
 
 
 # add me to the pile
@@ -25,6 +25,7 @@ mpi.defines := \
     WITH_MPI \
     ${if ${findstring mpich,$(mpi.flavor)}, WITH_MPICH,} \
     ${if ${findstring openmpi,$(mpi.flavor)}, WITH_OPENMPI,} \
+    ${if ${findstring mvapich2,$(mpi.flavor)}, WITH_MVAPICH2,} \
 # the canonical form of the include directory
 mpi.incpath ?= $(mpi.dir)/include
 
@@ -42,6 +43,9 @@ mpi.libraries := \
          mpi_cxx mpi, \
          mpi \
        } \
+    } \
+    ${if ${findstring mvapich2,$(mpi.flavor)}, \
+       mpifort mpicxx mpi, \
     }
 
 
