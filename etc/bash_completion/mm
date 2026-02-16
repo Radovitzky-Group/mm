@@ -60,41 +60,42 @@ _comp_cmd_mm__parse_test_suites()
         
         # Extract stem definitions
         # Example: summit.tst.serial.stem := serial
+        # Example: summit.report.stem := report
         while IFS= read -r line; do
             [[ -z "$line" ]] && continue
             # Extract the suite name and stem value
-            if [[ "$line" =~ \.tst\.([^.]+)\.stem[[:space:]]*:=[[:space:]]*([^[:space:]#]+) ]]; then
-                local suite="${BASH_REMATCH[1]}"
-                local stem="${BASH_REMATCH[2]}"
-                suite_stems["$suite"]="$stem"
-            elif [[ "$line" =~ \.tests\.([^.]+)\.stem[[:space:]]*:=[[:space:]]*([^[:space:]#]+) ]]; then
+            # Match any pattern: *.stem := value
+            if [[ "$line" =~ ([a-zA-Z0-9_-]+)\.stem[[:space:]]*:=[[:space:]]*([^[:space:]#]+) ]]; then
                 local suite="${BASH_REMATCH[1]}"
                 local stem="${BASH_REMATCH[2]}"
                 suite_stems["$suite"]="$stem"
             fi
-        done < <(grep -E '\.tst\.[^.]+\.stem\s*:=|\.tests\.[^.]+\.stem\s*:=' "$config_file" 2>/dev/null)
+        done < <(grep -E '\.stem\s*:=' "$config_file" 2>/dev/null)
         
         # Extract root definitions
         # Example: summit.tst.serial.root := TEST/serial/
+        # Example: summit.report.root := TEST/report/
         while IFS= read -r line; do
             [[ -z "$line" ]] && continue
-            if [[ "$line" =~ \.tst\.([^.]+)\.root[[:space:]]*:=[[:space:]]*([^[:space:]#]+) ]]; then
-                local suite="${BASH_REMATCH[1]}"
-                local root="${BASH_REMATCH[2]}"
-                suite_roots["$suite"]="$root"
-            elif [[ "$line" =~ \.tests\.([^.]+)\.root[[:space:]]*:=[[:space:]]*([^[:space:]#]+) ]]; then
+            # Match any pattern: *.root := value
+            if [[ "$line" =~ ([a-zA-Z0-9_-]+)\.root[[:space:]]*:=[[:space:]]*([^[:space:]#]+) ]]; then
                 local suite="${BASH_REMATCH[1]}"
                 local root="${BASH_REMATCH[2]}"
                 suite_roots["$suite"]="$root"
             fi
-        done < <(grep -E '\.tst\.[^.]+\.root\s*:=|\.tests\.[^.]+\.root\s*:=' "$config_file" 2>/dev/null)
+        done < <(grep -E '\.root\s*:=' "$config_file" 2>/dev/null)
     done
     
     # Output suite info: stem|root
+    # Filter to only test-related roots (TEST/ or tests/ directories)
     for suite in "${!suite_stems[@]}"; do
         local stem="${suite_stems[$suite]}"
         local root="${suite_roots[$suite]:-tests/$stem/}"  # Default if not specified
-        echo "$stem|$root"
+        
+        # Only include if root starts with TEST/ or tests/
+        if [[ "$root" =~ ^(TEST|tests)/ ]]; then
+            echo "$stem|$root"
+        fi
     done
 }
 
