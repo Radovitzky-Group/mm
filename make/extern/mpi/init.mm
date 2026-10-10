@@ -18,6 +18,11 @@ mpi.binpath ?= $(mpi.dir)/bin
 # the name of the launcher
 mpi.executive ?= mpiexec
 
+# runtime launcher flags to distribute processes across cores instead of oversubscribing;
+# for OpenMPI, use --bind-to none to match CMake behavior in .cmake/summit_tests.cmake:534
+# see https://github.com/open-mpi/ompi/issues/5798
+mpi.runflags ?= ${if ${findstring openmpi,$(mpi.flavor)}, --bind-to none,}
+
 # compiler flags
 mpi.flags ?=
 # enable {mpi} aware code

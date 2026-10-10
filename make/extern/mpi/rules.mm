@@ -10,6 +10,7 @@ extern.mpi.info:
 	@${call log.var,"version",$(mpi.version)}
 	@${call log.var,"flavor",$(mpi.flavor)}
 	@${call log.var,"executive",$(mpi.executive)}
+	@${call log.var,"runtime launcher flags",$(mpi.runflags)}
 	@${call log.var,"configuration file",$(mpi.config)}
 	@${call log.var,"home",$(mpi.dir)}
 	@${call log.var,"compiler flags",$(mpi.flags)}
